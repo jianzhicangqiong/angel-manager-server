@@ -21,4 +21,11 @@ public interface UserService {
      * @return
      */
     TbUser getUserById(Long userId);
+
+    /**
+     * 通过用户Id删除用户
+     * @param userId
+     * @return 影响的行数
+     */
+    int deleteUserById(Long userId);
 }

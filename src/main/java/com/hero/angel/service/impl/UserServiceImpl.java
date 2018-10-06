@@ -24,4 +24,9 @@ public class UserServiceImpl implements UserService {
     public TbUser getUserById(Long userId) {
         return userMapper.selectByPrimaryKey(userId);
     }
+
+    @Override
+    public int deleteUserById(Long userId) {
+        return userMapper.deleteByPrimaryKey(userId);
+    }
 }
