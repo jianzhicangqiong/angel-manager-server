@@ -27,13 +27,13 @@ public class UserController {
 
     @ApiOperation("通过Id获得用户")
     @GetMapping("/{userId}")
-    public TbUser getUserById(@ApiParam("用户Id") @PathVariable Long userId) {
+    public TbUser getUserById(@PathVariable Long userId) {
         return userService.getUserById(userId);
     }
 
     @ApiOperation("通过Id删除用户")
     @DeleteMapping("/{userId}")
-    public int deleteUserById(@ApiParam("用户Id") @PathVariable Long userId) {
+    public int deleteUserById(@PathVariable Long userId) {
         return userService.deleteUserById(userId);
     }
 
