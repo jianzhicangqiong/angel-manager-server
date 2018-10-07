@@ -9,6 +9,14 @@ import com.hero.angel.domain.TbUser;
 public interface UserService {
 
     /**
+     * 检查用户
+     * @param user
+     * @return
+     */
+    TbUser checkUser(TbUser user);
+
+
+    /**
      * 获得用户列表
      * @return
      */
