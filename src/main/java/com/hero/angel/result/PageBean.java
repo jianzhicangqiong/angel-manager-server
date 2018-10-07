@@ -26,12 +26,6 @@ public class PageBean {
     public PageBean(int currentPage, int pageSize) {
         this.currentPage = currentPage;
         this.pageSize = pageSize;
-        if(currentPage == 0){
-            this.currentPage = CURRENT_PAGE;
-        }
-        if(pageSize == 0){
-            this.pageSize = PAGE_SIZE;
-        }
     }
 
     public Collection getList() {
