@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 自定义文档
+ * Swagger2配置
  */
 @Configuration
 @EnableSwagger2
@@ -47,9 +47,8 @@ public class SwaggerConfig {
 
     ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("api swagger document")
+                .title("Api swagger document")
                 .version("1.0.1")
                 .build();
     }
-
 }
