@@ -19,22 +19,22 @@ public class ResultBean implements Serializable {
     private Object data;
 
 
-    /*成功构造器*/
-    public ResultBean ok() {
+    /*成功方法*/
+    public static ResultBean ok() {
         return new ResultBean();
     }
 
-    public ResultBean ok(Object data) {
+    public static ResultBean ok(Object data) {
         return new ResultBean(data);
     }
 
 
-    /*失败构造器*/
-    public ResultBean build() {
+    /*失败方法*/
+    public static ResultBean build() {
         return new ResultBean(FAIL,null, null);
     }
 
-    public ResultBean build(String msg) {
+    public static ResultBean build(String msg) {
         return new ResultBean(FAIL, msg, null);
     }
 

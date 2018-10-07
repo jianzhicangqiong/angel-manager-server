@@ -1,10 +1,10 @@
 package com.hero.angel.controller;
 
 import com.hero.angel.domain.TbUser;
+import com.hero.angel.result.ResultBean;
 import com.hero.angel.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -21,20 +21,23 @@ public class UserController {
 
     @ApiOperation("获得用户列表")
     @GetMapping
-    public List<TbUser> getUsers() {
-        return userService.getUsers();
+    public ResultBean getUsers() {
+        List<TbUser> users = userService.getUsers();
+        return ResultBean.ok(users);
     }
 
     @ApiOperation("通过Id获得用户")
     @GetMapping("/{userId}")
-    public TbUser getUserById(@PathVariable Long userId) {
-        return userService.getUserById(userId);
+    public ResultBean getUserById(@PathVariable Long userId) {
+        TbUser user = userService.getUserById(userId);
+        return ResultBean.ok(user);
     }
 
     @ApiOperation("通过Id删除用户")
     @DeleteMapping("/{userId}")
-    public int deleteUserById(@PathVariable Long userId) {
-        return userService.deleteUserById(userId);
+    public ResultBean deleteUserById(@PathVariable Long userId) {
+        int i = userService.deleteUserById(userId);
+        return ResultBean.ok();
     }
 
 }
