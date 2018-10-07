@@ -1,8 +1,7 @@
 package com.hero.angel.service;
 
+import com.github.pagehelper.PageInfo;
 import com.hero.angel.domain.TbUser;
-
-import java.util.List;
 
 /**
  * 用户操作接口规范
@@ -13,7 +12,7 @@ public interface UserService {
      * 获得用户列表
      * @return
      */
-    List<TbUser> getUsers();
+    PageInfo<TbUser> getUsers(Integer currentPage, Integer pageSize);
 
     /**
      * 通过Id获得用户
