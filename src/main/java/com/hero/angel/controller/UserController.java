@@ -22,22 +22,39 @@ public class UserController {
     @ApiOperation("获得用户列表")
     @GetMapping
     public ResultBean getUsers() {
-        List<TbUser> users = userService.getUsers();
-        return ResultBean.ok(users);
+        try {
+            List<TbUser> users = userService.getUsers();
+            return ResultBean.ok(users);
+        } catch (Exception e) {
+            return ResultBean.build("查询用户失败");
+        }
     }
 
     @ApiOperation("通过Id获得用户")
     @GetMapping("/{userId}")
     public ResultBean getUserById(@PathVariable Long userId) {
-        TbUser user = userService.getUserById(userId);
-        return ResultBean.ok(user);
+        try {
+            TbUser user = userService.getUserById(userId);
+            if (user == null) {
+                return ResultBean.build("此用户不存在！");
+            }
+            return ResultBean.ok(user);
+        } catch (Exception e) {
+            return ResultBean.build("查询失败！");
+        }
     }
 
     @ApiOperation("通过Id删除用户")
     @DeleteMapping("/{userId}")
     public ResultBean deleteUserById(@PathVariable Long userId) {
-        int i = userService.deleteUserById(userId);
-        return ResultBean.ok();
+        try {
+            int i = userService.deleteUserById(userId);
+            if(i == 0) {
+                return ResultBean.build("无此用户");
+            }
+            return ResultBean.ok();
+        } catch (Exception e) {
+            return ResultBean.build("删除用户失败");
+        }
     }
-
 }
