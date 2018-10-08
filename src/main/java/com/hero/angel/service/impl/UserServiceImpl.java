@@ -6,16 +6,32 @@ import com.hero.angel.domain.TbUser;
 import com.hero.angel.domain.TbUserExample;
 import com.hero.angel.mapper.TbUserMapper;
 import com.hero.angel.service.UserService;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Resource
     private TbUserMapper userMapper;
+
+    /**
+     * 用户权限认证
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
+    }
+
+
 
     @Override
     public TbUser checkUser(TbUser user) {
@@ -55,4 +71,5 @@ public class UserServiceImpl implements UserService {
     public int deleteUserById(Long userId) {
         return userMapper.deleteByPrimaryKey(userId);
     }
+
 }
