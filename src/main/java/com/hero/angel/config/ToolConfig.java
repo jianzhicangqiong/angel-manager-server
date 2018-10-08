@@ -30,9 +30,5 @@ public class ToolConfig {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public AuthenticationManager authenticationManager() {
-//        return new AuthenticationManagerBuilder(null);
-//    }
 
 }
