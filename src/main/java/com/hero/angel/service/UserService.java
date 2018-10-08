@@ -1,6 +1,7 @@
 package com.hero.angel.service;
 
 import com.github.pagehelper.PageInfo;
+import com.hero.angel.domain.JwtUser;
 import com.hero.angel.domain.TbUser;
 
 /**
@@ -9,12 +10,11 @@ import com.hero.angel.domain.TbUser;
 public interface UserService {
 
     /**
-     * 检查用户
+     * 添加用户
      * @param user
      * @return
      */
-    TbUser checkUser(TbUser user);
-
+    int insertUser(TbUser user);
 
     /**
      * 获得用户列表
