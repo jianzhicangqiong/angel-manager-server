@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // 身份认证组件
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
+        auth.userDetailsService(this.userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 
     /**
@@ -71,8 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webjars/**").permitAll()
                 .antMatchers("/auth/**").permitAll()
                 // 其他所有请求需要认证
-                //.anyRequest().hasRole("ADMIN").and()
-                .antMatchers("/user/**").hasRole("ADMIN").and()
+                .anyRequest().hasRole("ADMIN").and()
                 .headers().cacheControl().and().and()
                 // 验证登录
                 .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
