@@ -39,9 +39,6 @@ public class JwtUserServiceImpl implements JwtUserService, UserDetailsService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Resource
-    private UserService userService;
-
-    @Resource
     private TbUserMapper userMapper;
 
     /**
@@ -83,13 +80,13 @@ public class JwtUserServiceImpl implements JwtUserService, UserDetailsService {
 
     @Override
     public int register(JwtUser user) {
-        String encodingPassword = bCryptPasswordEncoder.encode(user.getPassword());
 
+        String encodingPassword = bCryptPasswordEncoder.encode(user.getPassword());
         //
         TbUser insertUser = new TbUser();
         insertUser.setUsername(user.getUsername());
         insertUser.setPassword(encodingPassword);
-        int i = userService.insertUser(insertUser);
+        int i = userMapper.insertSelective(insertUser);
         return i;
     }
 

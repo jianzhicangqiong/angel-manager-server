@@ -15,3 +15,5 @@ spring:
 logging:
   level:
     com.hero.demo.* : trace
+    org.springframework:
+      security: DEBUG
