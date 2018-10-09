@@ -1,10 +1,12 @@
 package com.hero.angel.service.impl;
 
 import com.hero.angel.domain.JwtUser;
+import com.hero.angel.domain.TbRole;
 import com.hero.angel.domain.TbUser;
 import com.hero.angel.domain.TbUserExample;
 import com.hero.angel.mapper.TbUserMapper;
 import com.hero.angel.service.JwtUserService;
+import com.hero.angel.service.RoleService;
 import com.hero.angel.util.JwtTokenUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,6 +40,9 @@ public class JwtUserServiceImpl implements JwtUserService, UserDetailsService {
     @Resource
     private TbUserMapper userMapper;
 
+    @Resource
+    private RoleService roleService;
+
     /**
      * 用户权限认证
      * @param username
@@ -59,9 +64,14 @@ public class JwtUserServiceImpl implements JwtUserService, UserDetailsService {
         // 权限 ,这种方式构建，一定要使用 "ROLE_xxx"格式
         // TODO
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
+        // 获得该用户的权限
+        List<TbRole> roles = roleService.getRolesByUserId(user.getUserId());
 
+        for(TbRole role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        //authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         return new JwtUser(user.getUsername(), user.getPassword(), authorities);
     }
 
