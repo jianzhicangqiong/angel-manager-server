@@ -35,8 +35,11 @@ public class UserAuthController {
     @ApiOperation("添加用户，用户注册")
     @PostMapping("/user")
     public ResultBean authRegister(@RequestBody JwtUser user) {
-        int i = jwtUserService.register(user);
-        return ResultBean.ok(i);
+        try {
+            int i = jwtUserService.register(user);
+            return ResultBean.ok(i);
+        }catch (Exception e) {
+            return ResultBean.build("注册失败！");
+        }
     }
-
 }
