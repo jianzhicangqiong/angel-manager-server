@@ -65,7 +65,7 @@ public class JwtUserServiceImpl implements JwtUserService, UserDetailsService {
         // 权限
         // TODO
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        authorities.add(new SimpleGrantedAuthority("ADMIN"));
         // authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
         return new JwtUser(user.getUsername(), user.getPassword(), authorities);
