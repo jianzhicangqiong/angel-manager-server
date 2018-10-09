@@ -57,11 +57,11 @@ public class JwtUserServiceImpl implements JwtUserService, UserDetailsService {
         }
         TbUser user = users.get(0);
 
-        // 权限
+        // 权限 ,这种方式构建，一定要使用 "ROLE_xxx"格式
         // TODO
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ADMIN"));
-        // authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+
 
         return new JwtUser(user.getUsername(), user.getPassword(), authorities);
     }
