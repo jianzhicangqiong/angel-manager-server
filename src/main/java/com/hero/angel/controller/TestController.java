@@ -1,5 +1,6 @@
 package com.hero.angel.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIM')")
     @GetMapping("/hello")
     public String hello() {
         return "hello";

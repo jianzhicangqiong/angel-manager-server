@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-ui.html",
                         "*.js",
                         "/webjars/**").permitAll()
-                .antMatchers("/hello").permitAll()
+                .antMatchers("/auth/**").permitAll()
                 // 其他所有请求需要认证
                 .anyRequest().authenticated().and();
 

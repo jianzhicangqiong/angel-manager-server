@@ -1,7 +1,5 @@
 package com.hero.angel.filter;
 
-import com.hero.angel.domain.TbUser;
-import com.hero.angel.service.UserService;
 import com.hero.angel.util.JwtTokenUtil;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -46,7 +44,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         String token = request.getHeader("Authentication");
         if (token != null && token.startsWith("Bearer ")) {
             // token去Bearer
-            token.replace("Bearer ", "");
+            token = token.replace("Bearer ", "");
             // 获得用户名
             String username = jwtTokenUtil.getUsernameFromToken(token);
             if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

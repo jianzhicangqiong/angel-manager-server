@@ -16,7 +16,7 @@ public interface JwtUserService {
      * @param user
      * @return
      */
-    String register(JwtUser user);
+    int register(JwtUser user);
 
     /**
      * 刷新密钥
