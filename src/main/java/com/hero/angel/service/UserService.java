@@ -1,7 +1,6 @@
 package com.hero.angel.service;
 
 import com.github.pagehelper.PageInfo;
-import com.hero.angel.domain.JwtUser;
 import com.hero.angel.domain.TbUser;
 
 /**
