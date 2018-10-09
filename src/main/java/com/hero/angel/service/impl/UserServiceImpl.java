@@ -2,54 +2,20 @@ package com.hero.angel.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.hero.angel.domain.JwtUser;
 import com.hero.angel.domain.TbUser;
 import com.hero.angel.domain.TbUserExample;
 import com.hero.angel.mapper.TbUserMapper;
 import com.hero.angel.service.UserService;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 
     @Resource
     private TbUserMapper userMapper;
-
-    /**
-     * 用户权限认证
-     * @param username
-     * @return
-     * @throws UsernameNotFoundException
-     */
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        TbUserExample userExample = new TbUserExample();
-        TbUserExample.Criteria userExampleCriteria = userExample.createCriteria();
-        userExampleCriteria.andUsernameEqualTo(username);
-
-        List<TbUser> users = userMapper.selectByExample(userExample);
-        if(users.size() != 1) {
-            throw new UsernameNotFoundException("用户不存在");
-        }
-        TbUser user = users.get(0);
-
-        // 权限
-        // TODO
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        // authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-
-        return new JwtUser(user.getUsername(), user.getPassword(), authorities);
-    }
 
     @Override
     public int insertUser(TbUser user) {
