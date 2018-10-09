@@ -14,6 +14,6 @@ spring:
 #    com.hero.demo.mapper : debug
 logging:
   level:
-    com.hero.demo.* : trace
+    com.hero.demo.* : DEBUG
     org.springframework:
       security: DEBUG

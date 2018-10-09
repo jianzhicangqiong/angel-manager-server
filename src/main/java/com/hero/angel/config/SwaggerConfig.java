@@ -25,8 +25,8 @@ public class SwaggerConfig {
 
     // 默认令牌
     private static final String authorization = "Bearer eyJhbGciOiJIUzUxMiJ9" +
-            ".eyJleHAiOjE1NDEzMDU4MzMsInN1YiI6InJvb3QiLCJjcmVhdGVkIjoxNTM4NzEzODMzNjkxfQ" +
-            ".vlyUzoRUneqP-mgF3cxBT6fiAkYLqw-_o8JFBoF3R0apIGNBcmVTBNOO91r6RY3gkYvZPe-XsMHZar3cl18kNw";
+            ".eyJleHAiOjE1NDE2Njk2MzEsInN1YiI6InJvb3QiLCJjcmVhdGVkIjoxNTM5MDc3NjMxODMxfQ" +
+            ".ds0M5wEmu2p35nwOyOXYvDIyKGdYHHPd-4PxpE1P8-u1OOOOJ5bvmoBZIE15E49YSqOZvajkFUY5LlNovGel7g";
 
     @Bean
     public Docket customDocket(){
