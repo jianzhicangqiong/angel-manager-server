@@ -4,9 +4,11 @@ import com.hero.angel.domain.JwtUser;
 import com.hero.angel.domain.TbRole;
 import com.hero.angel.domain.TbUser;
 import com.hero.angel.domain.TbUserExample;
+import com.hero.angel.exception.CustomException;
 import com.hero.angel.mapper.TbUserMapper;
 import com.hero.angel.service.JwtUserService;
 import com.hero.angel.service.RoleService;
+import com.hero.angel.service.UserService;
 import com.hero.angel.util.JwtTokenUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -43,6 +45,9 @@ public class JwtUserServiceImpl implements JwtUserService, UserDetailsService {
     @Resource
     private RoleService roleService;
 
+    @Resource
+    private UserService userService;
+
     /**
      * 用户权限认证
      * @param username
@@ -51,18 +56,13 @@ public class JwtUserServiceImpl implements JwtUserService, UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        TbUserExample userExample = new TbUserExample();
-        TbUserExample.Criteria userExampleCriteria = userExample.createCriteria();
-        userExampleCriteria.andUsernameEqualTo(username);
 
-        List<TbUser> users = userMapper.selectByExample(userExample);
-        if(users.size() != 1) {
-            throw new UsernameNotFoundException("用户不存在");
+        TbUser user = userService.selectUserByUsername(username);
+
+        if(user == null) {
+            throw new UsernameNotFoundException("用户不存在！！！");
         }
-        TbUser user = users.get(0);
-
         // 权限 ,这种方式构建，一定要使用 "ROLE_xxx"格式
-        // TODO
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
         // 获得该用户的权限
@@ -88,8 +88,16 @@ public class JwtUserServiceImpl implements JwtUserService, UserDetailsService {
     @Override
     public int register(JwtUser user) {
 
+        // 通过用户名查找
+        TbUser tbUser = userService.selectUserByUsername(user.getUsername());
+
+        if(tbUser != null) {
+            return 0;
+        }
+
+        // 密码加密
         String encodingPassword = bCryptPasswordEncoder.encode(user.getPassword());
-        //
+
         TbUser insertUser = new TbUser();
         insertUser.setUsername(user.getUsername());
         insertUser.setPassword(encodingPassword);

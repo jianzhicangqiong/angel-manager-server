@@ -35,7 +35,7 @@ public class UserController {
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("用户信息表");
 
-        List<TbUser> users = userService.getUsers(currentPage, pageSize).getList();
+        List<TbUser> users = userService.selectUsers(currentPage, pageSize).getList();
 
         String fileName = "user-" + currentPage + "-" + pageSize + ".xls";
 
@@ -78,7 +78,7 @@ public class UserController {
         PageBean pageBean = new PageBean(currentPage, pageSize);
 
         try {
-            PageInfo pageInfo = userService.getUsers(currentPage, pageSize);
+            PageInfo pageInfo = userService.selectUsers(currentPage, pageSize);
             // 封装
             pageBean.setTotal(pageInfo.getTotal());
             pageBean.setList(pageInfo.getList());
@@ -92,7 +92,7 @@ public class UserController {
     @GetMapping("/{userId}")
     public ResultBean getUserById(@PathVariable Long userId) {
         try {
-            TbUser user = userService.getUserById(userId);
+            TbUser user = userService.selectUserById(userId);
             if (user == null) {
                 return ResultBean.build("此用户不存在！");
             }

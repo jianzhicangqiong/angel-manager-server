@@ -9,6 +9,13 @@ import com.hero.angel.domain.TbUser;
 public interface UserService {
 
     /**
+     * 通过用户名获得用户
+     * @param username
+     * @return
+     */
+    TbUser selectUserByUsername(String username);
+
+    /**
      * 添加用户
      * @param user
      * @return
@@ -19,14 +26,14 @@ public interface UserService {
      * 获得用户列表
      * @return
      */
-    PageInfo<TbUser> getUsers(Integer currentPage, Integer pageSize);
+    PageInfo<TbUser> selectUsers(Integer currentPage, Integer pageSize);
 
     /**
      * 通过Id获得用户
      * @param userId
      * @return
      */
-    TbUser getUserById(Long userId);
+    TbUser selectUserById(Long userId);
 
     /**
      * 通过用户Id删除用户

@@ -18,12 +18,25 @@ public class UserServiceImpl implements UserService {
     private TbUserMapper userMapper;
 
     @Override
+    public TbUser selectUserByUsername(String username) {
+        TbUserExample userExample = new TbUserExample();
+        TbUserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andUsernameEqualTo(username);
+        List<TbUser> users = userMapper.selectByExample(userExample);
+
+        if(users.size() == 1) {
+            return users.get(0);
+        }
+        return null;
+    }
+
+    @Override
     public int insertUser(TbUser user) {
         return userMapper.insertSelective(user);
     }
 
     @Override
-    public PageInfo<TbUser> getUsers(Integer currentPage, Integer pageSize) {
+    public PageInfo<TbUser> selectUsers(Integer currentPage, Integer pageSize) {
 
         // 添加分页
         PageHelper.startPage(currentPage, pageSize);
@@ -36,7 +49,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public TbUser getUserById(Long userId) {
+    public TbUser selectUserById(Long userId) {
         return userMapper.selectByPrimaryKey(userId);
     }
 
