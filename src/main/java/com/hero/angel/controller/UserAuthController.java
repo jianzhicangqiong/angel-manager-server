@@ -1,10 +1,8 @@
 package com.hero.angel.controller;
 
 import com.hero.angel.domain.JwtUser;
-import com.hero.angel.domain.TbUser;
 import com.hero.angel.result.ResultBean;
 import com.hero.angel.service.JwtUserService;
-import com.hero.angel.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;

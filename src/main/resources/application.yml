@@ -14,7 +14,7 @@ spring:
 #    com.hero.demo.mapper : debug
 logging:
   level:
-    com.hero.demo.* : DEBUG
+    com.hero.demo.*: DEBUG
     org.springframework:
       security: DEBUG
 # 初始配置
