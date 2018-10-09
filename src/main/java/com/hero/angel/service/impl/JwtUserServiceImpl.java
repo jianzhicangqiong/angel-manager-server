@@ -1,13 +1,17 @@
 package com.hero.angel.service.impl;
 
+import com.hero.angel.config.InitDataConfig;
 import com.hero.angel.domain.JwtUser;
 import com.hero.angel.domain.TbRole;
 import com.hero.angel.domain.TbUser;
+import com.hero.angel.domain.TbUserRole;
 import com.hero.angel.mapper.TbUserMapper;
+import com.hero.angel.mapper.TbUserRoleMapper;
 import com.hero.angel.service.JwtUserService;
 import com.hero.angel.service.RoleService;
 import com.hero.angel.service.UserService;
 import com.hero.angel.util.JwtTokenUtil;
+import org.springframework.boot.autoconfigure.web.ConditionalOnEnabledResourceChain;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -27,6 +31,8 @@ import java.util.List;
 @Service
 public class JwtUserServiceImpl implements JwtUserService, UserDetailsService {
 
+    @Resource
+    private InitDataConfig initDataConfig;
 
     @Resource
     private JwtTokenUtil jwtTokenUtil;
@@ -45,6 +51,9 @@ public class JwtUserServiceImpl implements JwtUserService, UserDetailsService {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private TbUserRoleMapper userRoleMapper;
 
     /**
      * 用户权限认证
@@ -94,11 +103,17 @@ public class JwtUserServiceImpl implements JwtUserService, UserDetailsService {
 
         // 密码加密
         String encodingPassword = bCryptPasswordEncoder.encode(user.getPassword());
-
         TbUser insertUser = new TbUser();
         insertUser.setUsername(user.getUsername());
         insertUser.setPassword(encodingPassword);
         int i = userMapper.insertSelective(insertUser);
+
+        // 给用户添加默认角色 Tb_User
+        TbUserRole userRole = new TbUserRole();
+        userRole.setUserId(insertUser.getUserId());
+        userRole.setRoleId(initDataConfig.getInitRoleId());
+        userRoleMapper.insertSelective(userRole);
+
         return i;
     }
 

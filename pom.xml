@@ -24,6 +24,7 @@
         <java.version>1.8</java.version>
     </properties>
 
+
     <dependencies>
         <!--Swagger2自动生成api文档-->
         <dependency>
@@ -37,6 +38,11 @@
             <version>2.9.2</version>
         </dependency>
 
+        <!--属性配置支持-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
 
         <!--spring-security框架-->
         <dependency>

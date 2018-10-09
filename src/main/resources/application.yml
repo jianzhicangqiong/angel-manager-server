@@ -17,3 +17,6 @@ logging:
     com.hero.demo.* : DEBUG
     org.springframework:
       security: DEBUG
+# 初始配置
+init:
+  init-role-id: 1
