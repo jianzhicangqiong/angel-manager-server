@@ -20,9 +20,6 @@ import javax.annotation.Resource;
 public class UserAuthController {
 
     @Resource
-    private UserService userService;
-
-    @Resource
     private JwtUserService jwtUserService;
 
     @ApiOperation("用户登录")
