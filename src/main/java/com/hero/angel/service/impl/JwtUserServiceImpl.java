@@ -5,7 +5,6 @@ import com.hero.angel.domain.TbUser;
 import com.hero.angel.domain.TbUserExample;
 import com.hero.angel.mapper.TbUserMapper;
 import com.hero.angel.service.JwtUserService;
-import com.hero.angel.service.UserService;
 import com.hero.angel.util.JwtTokenUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
