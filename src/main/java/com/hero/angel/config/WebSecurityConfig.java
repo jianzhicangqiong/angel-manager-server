@@ -1,7 +1,6 @@
 package com.hero.angel.config;
 
 import com.hero.angel.filter.JwtAuthenticationTokenFilter;
-import com.hero.angel.handler.EntryPointUnauthorizedHandler;
 import com.hero.angel.handler.RestAccessDeniedHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,10 +31,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
     private RestAccessDeniedHandler restAccessDeniedHandler;
-
-    @Resource
-    private EntryPointUnauthorizedHandler entryPointUnauthorizedHandler;
-
 
     // 解决AuthenticationManager 无法注入
     @Bean
@@ -77,7 +72,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 // 验证token出错
                 .exceptionHandling()
-                .authenticationEntryPoint(entryPointUnauthorizedHandler)
                 .accessDeniedHandler(restAccessDeniedHandler);
     }
 }

@@ -26,8 +26,6 @@ import java.util.List;
 @Service
 public class JwtUserServiceImpl implements JwtUserService, UserDetailsService {
 
-    @Resource
-    private UserDetailsService userDetailsService;
 
     @Resource
     private JwtTokenUtil jwtTokenUtil;
@@ -74,7 +72,7 @@ public class JwtUserServiceImpl implements JwtUserService, UserDetailsService {
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword());
         Authentication authentication =  authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+        UserDetails userDetails = loadUserByUsername(user.getUsername());
         return "Bearer " + jwtTokenUtil.generateToken(userDetails);
     }
 
