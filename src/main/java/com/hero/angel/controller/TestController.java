@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIM')")
     @GetMapping("/hello")
     public String hello() {
         return "hello";
