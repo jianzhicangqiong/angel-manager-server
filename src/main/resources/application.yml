@@ -14,4 +14,4 @@ spring:
 #    com.hero.demo.mapper : debug
 logging:
   level:
-    com.hero.demo.* : debug
+    com.hero.demo.* : trace

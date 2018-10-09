@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
+        http.csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 // 允许如下请求
@@ -71,11 +71,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webjars/**").permitAll()
                 .antMatchers("/auth/**").permitAll()
                 // 其他所有请求需要认证
-                .anyRequest().authenticated().and()
-
+                .anyRequest().hasRole("ADMIN").and()
 
                 // 验证登录
                 .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
+                .headers().cacheControl().and().and()
                 // 验证token
                 .exceptionHandling()
                 .authenticationEntryPoint(entryPointUnauthorizedHandler)
