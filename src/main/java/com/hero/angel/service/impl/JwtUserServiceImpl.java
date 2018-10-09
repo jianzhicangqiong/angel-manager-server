@@ -3,8 +3,6 @@ package com.hero.angel.service.impl;
 import com.hero.angel.domain.JwtUser;
 import com.hero.angel.domain.TbRole;
 import com.hero.angel.domain.TbUser;
-import com.hero.angel.domain.TbUserExample;
-import com.hero.angel.exception.CustomException;
 import com.hero.angel.mapper.TbUserMapper;
 import com.hero.angel.service.JwtUserService;
 import com.hero.angel.service.RoleService;
@@ -62,12 +60,11 @@ public class JwtUserServiceImpl implements JwtUserService, UserDetailsService {
         if(user == null) {
             throw new UsernameNotFoundException("用户不存在！！！");
         }
-        // 权限 ,这种方式构建，一定要使用 "ROLE_xxx"格式
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
         // 获得该用户的权限
         List<TbRole> roles = roleService.getRolesByUserId(user.getUserId());
-
+        // 权限 ,这种方式构建，一定要使用 "ROLE_xxx"格式
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         for(TbRole role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
