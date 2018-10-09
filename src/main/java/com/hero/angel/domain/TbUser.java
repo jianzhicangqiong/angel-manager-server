@@ -33,6 +33,9 @@ public class TbUser {
 
     private Date updateTime;
 
+    public TbUser() {
+    }
+
     public Long getUserId() {
         return userId;
     }
