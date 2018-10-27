@@ -43,6 +43,15 @@ public class RoleServiceImpl implements RoleService {
         return roles;
     }
 
+    @Override
+    public List<TbRole> getRolesByParent(Long parentId) {
+        TbRoleExample roleExample = new TbRoleExample();
+        TbRoleExample.Criteria criteria = roleExample.createCriteria();
+        criteria.andParentIdEqualTo(parentId);
+
+        return roleMapper.selectByExample(roleExample);
+    }
+
     protected List<TbUserRole> getUserRolesByUserId(Long userId) {
         TbUserRoleExample userRoleExample = new TbUserRoleExample();
         TbUserRoleExample.Criteria criteria = userRoleExample.createCriteria();

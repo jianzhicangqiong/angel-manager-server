@@ -17,6 +17,8 @@ public class TbRole {
 
     private Boolean status;
 
+    private Boolean isLeaf;
+
     public Long getRoleId() {
         return roleId;
     }
@@ -71,5 +73,13 @@ public class TbRole {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public Boolean getIsLeaf() {
+        return isLeaf;
+    }
+
+    public void setIsLeaf(Boolean isLeaf) {
+        this.isLeaf = isLeaf;
     }
 }

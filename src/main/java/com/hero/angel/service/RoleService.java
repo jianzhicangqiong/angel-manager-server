@@ -16,4 +16,11 @@ public interface RoleService {
      */
     List<TbRole> getRolesByUserId(Long userId);
 
+    /**
+     * 获得子角色
+     * @param parentId 父角色Id
+     * @return
+     */
+    List<TbRole> getRolesByParent(Long parentId);
+
 }

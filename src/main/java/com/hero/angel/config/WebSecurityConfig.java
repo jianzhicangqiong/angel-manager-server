@@ -66,7 +66,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webjars/**").permitAll()
                 .antMatchers("/auth/**").permitAll()
                 // 其他所有请求需要认证
-                .anyRequest().hasAuthority("ROLE_ADMIN").and()
+//                .anyRequest().hasAuthority("ROLE_ADMIN").and()
+                .anyRequest().permitAll().and()
                 .headers().cacheControl().and().and()
                 // 验证登录
                 .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)

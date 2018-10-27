@@ -45,7 +45,7 @@
                <!--enableDeleteByExample="true" enableSelectByExample="true"-->
                <!--selectByExampleQueryId="true"></table>-->
 
-        <table tableName="tb_user" domainObjectName="TbUser"
+        <table tableName="tb_role" domainObjectName="TbRole"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true"></table>
